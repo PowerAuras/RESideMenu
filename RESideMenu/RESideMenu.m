@@ -535,6 +535,10 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
+	//push过后就不能打开侧边栏了
+    	if ([[(UINavigationController *)[(UITabBarController *)self.contentViewController selectedViewController] viewControllers] count] > 1) {
+      	  return NO;
+ 	}
 	if (self.interactivePopGestureRecognizerEnabled && [self.contentViewController isKindOfClass:[UINavigationController class]]) {
 		UINavigationController *navigationController = (UINavigationController *)self.contentViewController;
 		if (navigationController.viewControllers.count > 1 && navigationController.interactivePopGestureRecognizer.enabled) {
